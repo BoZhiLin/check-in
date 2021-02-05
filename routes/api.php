@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/** CheckInRecord */
-Route::group(['as' => 'record.'], function () {
-    /** 簽到 */
-    Route::post('/check_in', 'CheckInRecordController@signIn')->name('check_in');
-    /** 簽退 */
-    Route::post('/check_out', 'CheckInRecordController@signOut')->name('check_out');
-    /** 補簽到 */
-    Route::post('/recoup', 'CheckInRecordController@recoup')->name('recoup');
+/** 登入認證 */
+Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
+    /** 登入 */
+    Route::post('/login', 'AuthController@login')->name('login');
+    /** 登出 */
+    Route::post('/logout', 'AuthController@logout')->name('logout')->middleware('api.auth');
+    /** 更換Token */
+    Route::post('/refresh', 'AuthController@refresh')->name('refresh')->middleware('api.auth');
+});
+
+/** Authenticated Allow */
+Route::group(['middleware' => ['api.auth']], function () {
+    // TODO
 });

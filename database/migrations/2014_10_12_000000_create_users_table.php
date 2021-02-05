@@ -16,13 +16,12 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('姓名');
-            $table->string('email')->unique()->comment('信箱');
+            $table->string('username')->unique()->comment('代號');
             $table->string('password')->comment('密碼');
-            $table->tinyInteger('gender')->comment('性別');
+            $table->string('gender')->comment('性別');
             $table->string('phone')->nullable()->comment('聯絡電話');
             $table->date('report_date')->nullable()->comment('報到日');
             $table->text('remark')->nullable()->comment('備註');
-            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

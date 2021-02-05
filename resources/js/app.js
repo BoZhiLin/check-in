@@ -8,11 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import App from '../js/components/App';
-import VueRouter from 'vue-router';
+import Vue from 'vue';
 import router from './router/index.js';
-
-Vue.use(VueRouter);
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 /**
  * The following block of code may be used to automatically register your
@@ -25,7 +25,10 @@ Vue.use(VueRouter);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('app', require('./components/App.vue'));
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
+
+Vue.component('app', require('./components/App.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,6 +38,5 @@ Vue.component('app', require('./components/App.vue'));
 
 const app = new Vue({
     el: '#app',
-    router,
-    components: { App }
+    router
 });

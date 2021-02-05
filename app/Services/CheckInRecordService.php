@@ -2,30 +2,30 @@
 
 namespace App\Services;
 
-use App\Defined\ResponseDefined;
-use App\Defined\RecordStatusDefined;
+use App\Defined\ApiResponse;
+use App\Defined\RecordStatus;
 
-use App\Repositories\CheckInRecordRepository;
+use App\Models\CheckInRecord;
 
 class CheckInRecordService
 {
     /** 簽到 */
     public static function signIn(int $user_id)
     {
-        $result = ['status' => ResponseDefined::SUCCESS];
-        $current_day_record = CheckInRecordRepository::getCurrentByUser($user_id);
+        $result = ['status' => ApiResponse::SUCCESS];
+        $current_day_record = CheckInRecord::where('user_id', $user_id)
+            ->whereDate('created_at', today())
+            ->first();
 
         /** TODO: 防呆還沒做(上/下班時間) */
         if (!is_null($current_day_record)) {
-            $result['status'] = ResponseDefined::CHECK_IN_EXISTS;
+            $result['status'] = ApiResponse::CHECK_IN_EXISTS;
         } else {
-            $data = [
-                'user_id' => $user_id,
-                'status' => RecordStatusDefined::NORMAL,
-                'sign_in_at' => now()
-            ];
-            $record = CheckInRecordRepository::signIn($data);
-            $result['data']['record'] = $record;
+            $record = new CheckInRecord();
+            $record->user_id = $user_id;
+            $record->status = RecordStatus::NORMAL;
+            $record->sign_in_at = now();
+            $record->save();
         }
 
         return $result;
@@ -34,11 +34,13 @@ class CheckInRecordService
     /** 簽退 */
     public static function signOut(int $user_id)
     {
-        $result = ['status' => ResponseDefined::SUCCESS];
-        $current_day_record = CheckInRecordRepository::getCurrentByUser($user_id);
+        $result = ['status' => ApiResponse::SUCCESS];
+        $current_day_record = CheckInRecord::where('user_id', $user_id)
+            ->whereDate('created_at', today())
+            ->first();
 
         if (is_null($current_day_record)) {
-            $result['status'] = ResponseDefined::CHECK_IN_NOT_FOUND;
+            $result['status'] = ApiResponse::CHECK_IN_NOT_FOUND;
         } else {
             $now_time = now()->toDateTimeString();
             $duration = date('H:i:s', strtotime($current_day_record->sign_in_at) - strtotime($now_time));

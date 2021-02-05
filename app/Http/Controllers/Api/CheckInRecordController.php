@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
-
 use App\Services\CheckInRecordService;
 
-class CheckInRecordController extends Controller
+class CheckInRecordController extends ApiController
 {
     public function signIn()
     {
