@@ -11,14 +11,14 @@ class CheckInRecordController extends ApiController
     public function signIn()
     {
         $user_id = auth()->id();
-        $result = CheckInRecordService::signIn($user_id);
+        $result = CheckInRecordService::signInByUser($user_id);
         return $result;
     }
 
     public function signOut()
     {
         $user_id = auth()->id();
-        $result = CheckInRecordService::signOut($user_id);
+        $result = CheckInRecordService::signOutByUser($user_id);
         return $result;
     }
 

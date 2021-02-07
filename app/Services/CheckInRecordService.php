@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Defined\System;
 use App\Defined\ApiResponse;
 use App\Defined\RecordStatus;
 
@@ -10,7 +11,7 @@ use App\Models\CheckInRecord;
 class CheckInRecordService
 {
     /** 簽到 */
-    public static function signIn(int $user_id)
+    public static function signInByUser(int $user_id)
     {
         $result = ['status' => ApiResponse::SUCCESS];
         $current_day_record = CheckInRecord::where('user_id', $user_id)
@@ -32,7 +33,7 @@ class CheckInRecordService
     }
 
     /** 簽退 */
-    public static function signOut(int $user_id)
+    public static function signOutByUser(int $user_id)
     {
         $result = ['status' => ApiResponse::SUCCESS];
         $current_day_record = CheckInRecord::where('user_id', $user_id)
