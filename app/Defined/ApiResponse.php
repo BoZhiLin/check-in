@@ -25,4 +25,8 @@ abstract class ApiResponse
     const CHECK_IN_EXISTS = 201;
     /** 本日尚未遷到 */
     const CHECK_IN_NOT_FOUND = 202;
+    /** 尚未開放打卡 */
+    const CHECK_IN_NOT_OPEN = 203;
+    /** 本日已簽退 */
+    const CHECK_OUT_EXISTS = 204;
 }

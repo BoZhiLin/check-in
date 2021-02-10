@@ -11,8 +11,8 @@ class CheckInRecord extends Model
     use HasFactory, SoftDeletes;
 
     protected $dates = [
-        'sign_in_at',
-        'sign_out_at',
+        'started_at',
+        'ended_at',
         'deleted_at',
     ];
 

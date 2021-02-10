@@ -14,6 +14,7 @@ class CreateLogsTable extends Migration
     public function up()
     {
         Schema::create('logs', function (Blueprint $table) {
+            $table->id();
             $table->text('ip')->comment('操作IP');
             $table->text('action')->comment('動作');
             $table->text('device')->nullable()->comment('user-agent');
@@ -21,6 +22,7 @@ class CreateLogsTable extends Migration
             $table->text('get')->comment('get');
             $table->text('session')->nullable()->comment('session');
             $table->text('response')->nullable()->comment('response');
+            $table->timestamps();
         });
     }
 

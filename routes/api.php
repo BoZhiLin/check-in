@@ -25,5 +25,8 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
 
 /** Authenticated Allow */
 Route::group(['middleware' => ['api.auth']], function () {
-    // TODO
+    /** 簽到 */
+    Route::post('/checkin', 'CheckInRecordController@checkIn')->name('checkin');
+    /** 簽退 */
+    Route::post('/checkout', 'CheckInRecordController@checkOut')->name('checkout');
 });

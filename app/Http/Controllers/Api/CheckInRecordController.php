@@ -8,18 +8,16 @@ use App\Services\CheckInRecordService;
 
 class CheckInRecordController extends ApiController
 {
-    public function signIn()
+    public function checkIn()
     {
-        $user_id = auth()->id();
-        $result = CheckInRecordService::signInByUser($user_id);
-        return $result;
+        $response = CheckInRecordService::checkInByUser(auth()->id());
+        return response($response);
     }
 
-    public function signOut()
+    public function checkOut()
     {
-        $user_id = auth()->id();
-        $result = CheckInRecordService::signOutByUser($user_id);
-        return $result;
+        $response = CheckInRecordService::checkOutByUser(auth()->id());
+        return response($response);
     }
 
     public function recoup(Request $request)

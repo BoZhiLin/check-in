@@ -17,9 +17,9 @@ class CreateCheckInRecordsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->comment('所屬用戶');
             $table->string('status')->comment('狀態');
-            $table->timestamp('sign_in_at')->nullable()->comment('簽到時間');
-            $table->timestamp('sign_out_at')->nullable()->comment('簽退時間');
-            $table->double('duration')->default(0)->comment('總時長');
+            $table->timestamp('started_at')->nullable()->comment('簽到時間');
+            $table->timestamp('ended_at')->nullable()->comment('簽退時間');
+            $table->integer('duration')->default(0)->comment('總時長(秒)');
             $table->timestamps();
             $table->softDeletes();
         });
