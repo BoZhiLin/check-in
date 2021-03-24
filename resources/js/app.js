@@ -13,12 +13,13 @@ import router from './router/index.js';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import VueDatetime from "vue-datetime";
 import VueTimepicker from 'vue2-timepicker'
-import VueSwal from 'vue-swal';
+import VueSwal from 'vue-sweetalert2';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'vue-datetime/dist/vue-datetime.css';
 import 'vue2-timepicker/dist/VueTimepicker.css';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 /**
  * The following block of code may be used to automatically register your
@@ -33,8 +34,12 @@ import 'vue2-timepicker/dist/VueTimepicker.css';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-Vue.use(VueSwal);
 Vue.use(VueDatetime);
+
+Vue.use(VueSwal, {
+    confirmButtonColor: "#007bff",
+    cancelButtonColor: "#dc3545"
+});
 
 Vue.component('vue-timepicker', VueTimepicker);
 

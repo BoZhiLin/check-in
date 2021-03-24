@@ -11,7 +11,7 @@ use App\Services\LeaveService;
 
 class LeaveController extends ApiController
 {
-    public function reply(Request $request)
+    public function apply(Request $request)
     {
         $leave_types = implode(',', LeaveType::all());
         $response = $this->validateRequest($request->all(), [
@@ -39,7 +39,7 @@ class LeaveController extends ApiController
         ]);
 
         if ($response['status'] === ApiResponse::SUCCESS) {
-            $response = LeaveService::reply(auth()->id(),
+            $response = LeaveService::apply(auth()->id(),
                 $request->date,
                 $request->type,
                 $request->started_time,

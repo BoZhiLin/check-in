@@ -26,6 +26,10 @@ class Api {
     return this.sendRequest("/api/check/out", "POST", true, data);
   }
 
+  leave(data) {
+    return this.sendRequest("/api/leave/apply", "POST", true, data);
+  }
+
   getCheckRecords() {
     return this.sendRequest("/api/user/checks", "GET", true);
   }

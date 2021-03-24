@@ -33,6 +33,12 @@ Route::group(['middleware' => ['api.auth']], function () {
         Route::post('/out', 'CheckController@checkOut')->name('out');
     });
 
+    /** 請假 */
+    Route::group(['prefix' => 'leave', 'as' => 'leave.'], function () {
+        /** 申請 */
+        Route::post('/apply', 'LeaveController@apply')->name('apply');
+    });
+
     /** User */
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         /** 取得資訊 */

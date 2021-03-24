@@ -16,7 +16,7 @@ class LeaveRepository extends Repository
         $leave->type = $data['type'];
         $leave->started_time = $data['started_time'];
         $leave->ended_time = $data['ended_time'];
-        $leave->duration = $data['total_seconds'];
+        $leave->duration = $data['duration'];
         $leave->status = $data['status'];
         $leave->save();
 

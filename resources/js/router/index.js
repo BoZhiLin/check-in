@@ -15,14 +15,19 @@ const routes = [
     component: require("../views/Login.vue").default
   },
   {
+    path: "/profile",
+    name: "profile",
+    component: require("../views/Check.vue").default
+  },
+  {
     path: "/check",
     name: "check",
     component: require("../views/Check.vue").default
   },
   {
-    path: "/profile",
-    name: "profile",
-    component: require("../views/Check.vue").default
+    path: "/leave",
+    name: "leave",
+    component: require("../views/Leave.vue").default
   },
 ];
 

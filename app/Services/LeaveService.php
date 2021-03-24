@@ -25,7 +25,7 @@ class LeaveService
      * @param string $ended_time
      * @return array
      */
-    public static function reply(int $user_id, string $date, string $type, string $started_time, string $ended_time)
+    public static function apply(int $user_id, string $date, string $type, string $started_time, string $ended_time)
     {
         $response = ['status' => ApiResponse::SUCCESS];
         $total_seconds = Tool::duration($ended_time, $started_time);
