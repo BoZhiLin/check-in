@@ -25,8 +25,17 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
 
 /** Authenticated Allow */
 Route::group(['middleware' => ['api.auth']], function () {
-    /** 簽到 */
-    Route::post('/checkin', 'CheckInRecordController@checkIn')->name('checkin');
-    /** 簽退 */
-    Route::post('/checkout', 'CheckInRecordController@checkOut')->name('checkout');
+    /** 打卡紀錄 */
+    Route::group(['prefix' => 'check', 'as' => 'check.'], function () {
+        /** 簽到 */
+        Route::post('/in', 'CheckController@checkIn')->name('in');
+        /** 簽退 */
+        Route::post('/out', 'CheckController@checkOut')->name('out');
+    });
+
+    /** User */
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        /** 取得打卡紀錄 */
+        Route::get('/checks', 'UserController@getCheckRecords')->name('checks');
+    });
 });

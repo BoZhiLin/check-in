@@ -25,8 +25,12 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.21.2",
+        "luxon": "^1.26.0",
         "vue-axios": "^3.2.2",
+        "vue-datetime": "^1.0.0-beta.14",
         "vue-router": "^3.4.9",
-        "vue-swal": "^1.0.0"
+        "vue-swal": "^1.0.0",
+        "vue2-timepicker": "^1.1.6",
+        "weekstart": "^1.0.1"
     }
 }

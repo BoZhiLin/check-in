@@ -53,7 +53,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function checkInRecords()
     {
-        return $this->hasMany(CheckInRecord::class);
+        return $this->hasMany(Check::class);
     }
 
     /**

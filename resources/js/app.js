@@ -10,9 +10,15 @@ window.Vue = require('vue');
 
 import Vue from 'vue';
 import router from './router/index.js';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import VueDatetime from "vue-datetime";
+import VueTimepicker from 'vue2-timepicker'
+import VueSwal from 'vue-swal';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+import 'vue-datetime/dist/vue-datetime.css';
+import 'vue2-timepicker/dist/VueTimepicker.css';
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,8 +33,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+Vue.use(VueSwal);
+Vue.use(VueDatetime);
 
-Vue.component('app', require('./components/App.vue').default);
+Vue.component('vue-timepicker', VueTimepicker);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
