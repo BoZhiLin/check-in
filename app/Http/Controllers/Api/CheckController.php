@@ -13,16 +13,16 @@ class CheckController extends ApiController
     public function checkIn(Request $request)
     {
         $response = $this->validateRequest($request->all(), [
-            'time' => 'required|date_format:H:i:s'
+            'started_time' => 'required|date_format:H:i:s'
         ], [
-            'time' => [
+            'started_time' => [
                 'Required' => ApiResponse::CHECK_TIME_REQUIRED,
                 'DateFormat' => ApiResponse::CHECK_TIME_INVALID
             ]
         ]);
 
         if ($response['status'] === ApiResponse::SUCCESS) {
-            $response = CheckService::checkIn(auth()->id(), $request->time);
+            $response = CheckService::checkIn(auth()->id(), $request->started_time);
         }
 
         return response($response);
@@ -31,16 +31,16 @@ class CheckController extends ApiController
     public function checkOut(Request $request)
     {
         $response = $this->validateRequest($request->all(), [
-            'time' => 'required|date_format:H:i:s'
+            'ended_time' => 'required|date_format:H:i:s'
         ], [
-            'time' => [
+            'ended_time' => [
                 'Required' => ApiResponse::CHECK_TIME_REQUIRED,
                 'DateFormat' => ApiResponse::CHECK_TIME_INVALID
             ]
         ]);
         
         if ($response['status'] === ApiResponse::SUCCESS) {
-            $response = CheckService::checkOut(auth()->id(), $request->time);
+            $response = CheckService::checkOut(auth()->id(), $request->ended_time);
         }
 
         return response($response);

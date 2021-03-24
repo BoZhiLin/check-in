@@ -1,6 +1,8 @@
 <template>
   <div>
     <Navbar />
+    <div class="divider"></div>
+
     <slot></slot>
   </div>
 </template>
@@ -22,17 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .main { 
-//   display: grid;
-//   grid-template-columns: 1fr 5fr;
-//   background-color: #252a30;
-//   height: 100vh;
-//   width: 100vw;
-// }
-
-// .content {
-//   background-color: white;
-//   border-radius: 10px;
-//   margin: 6px 6px 6px 0px;
-// }
+.divider {
+  padding: 5px;
+}
 </style>

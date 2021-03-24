@@ -19,8 +19,12 @@ class Api {
     return this.sendRequest("/api/check/in", "POST", true, data);
   }
 
+  checkOut(data) {
+    return this.sendRequest("/api/check/out", "POST", true, data);
+  }
+
   getUserRecord() {
-    return this.sendRequest("/api/check/search", "GET", true);
+    return this.sendRequest("/api/user/checks", "GET", true);
   }
 
   async sendRequest(url, method, withToken, body, queryString) {
@@ -41,7 +45,11 @@ class Api {
       params: queryString
     });
 
-    return promise;
+    if (this.unauthorized.indexOf(promise.data.status) !== -1) {
+      window.location.href = '/login';
+    } else {
+      return promise;
+    }
   }
 }
 

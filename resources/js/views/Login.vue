@@ -65,7 +65,8 @@ export default {
           if (response.status === defined.response.SUCCESS) {
             localStorage.setItem("access_token", response.data.access_token);
             localStorage.setItem("expired_at", response.data.expired_at);
-            // 跳轉
+            
+            this.$router.push({ name: "home" });
           } else {
             this.$swal("錯誤", "帳號或密碼錯誤", "error");
           }
