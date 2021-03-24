@@ -5,15 +5,25 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/",
+    name: "home",
+    component: require("../views/Home.vue").default
+  },
+  {
     path: "/login",
     name: "login",
     component: require("../views/Login.vue").default
   },
   {
-    path: "/",
-    name: "home",
+    path: "/check",
+    name: "check",
     component: require("../views/Check.vue").default
-  }
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: require("../views/Check.vue").default
+  },
 ];
 
 export default new VueRouter({

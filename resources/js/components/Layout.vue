@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <Navbar />
     <div class="divider"></div>
 
@@ -26,5 +26,9 @@ export default {
 <style lang="scss" scoped>
 .divider {
   padding: 5px;
+}
+
+.main {
+  overflow-x: hidden;
 }
 </style>

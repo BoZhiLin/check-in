@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Tools\Tool;
+
 class LeaveRepository extends Repository
 {
     protected static $model = \App\Models\Leave::class;
@@ -16,14 +18,18 @@ class LeaveRepository extends Repository
         $leave->ended_time = $data['ended_time'];
         $leave->duration = $data['total_seconds'];
         $leave->status = $data['status'];
-
         $leave->save();
+
+        return $leave;
     }
 
     public static function getByUser(int $user_id, string $sort = 'asc')
     {
         return static::$model::where('user_id', $user_id)
             ->orderBy('id', $sort)
-            ->get();
+            ->get()
+            ->each(function ($leave) {
+                $leave->duration_time = Tool::secondsToTime($leave->duration);
+            });
     }
 }

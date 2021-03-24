@@ -14,7 +14,7 @@
           :footer-bg-variant="card.footer_bg"
           footer-border-variant="dark"
         >
-          <b-form onsubmit="return false;">
+          <b-form @submit.stop.prevent>
             <div class="check-group">
               <label>上班時間：</label>
               <vue-timepicker format="HH:mm:ss" v-model="started_time" v-if="!today_record"></vue-timepicker>
@@ -79,7 +79,7 @@ export default {
     };
   },
   created() {
-    this.getUserRecord();
+    this.getCheckRecords();
   },
   methods: {
     checkIn() {
@@ -88,7 +88,7 @@ export default {
         })
         .then(({ data }) => {
           if (data.status === defined.response.SUCCESS) {
-            this.getUserRecord();
+            this.getCheckRecords();
             this.$swal({
               type: "success",
               title: "上班",
@@ -104,7 +104,7 @@ export default {
         })
         .then(({ data }) => {
           if (data.status === defined.response.SUCCESS) {
-            this.getUserRecord();
+            this.getCheckRecords();
             this.$swal({
               type: "success",
               title: "下班",
@@ -113,8 +113,8 @@ export default {
           }
         });
     },
-    getUserRecord() {
-      api.getUserRecord()
+    getCheckRecords() {
+      api.getCheckRecords()
         .then((response) => {
           const { status, data } = response.data;
 

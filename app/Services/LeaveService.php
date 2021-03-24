@@ -43,7 +43,7 @@ class LeaveService
         }
 
         if ($response['status'] === ApiResponse::SUCCESS) {
-            LeaveRepository::create([
+            $leave_info = LeaveRepository::create([
                 'user_id' => $user_id,
                 'date' => $date,
                 'type' => $type,
@@ -52,6 +52,8 @@ class LeaveService
                 'duration' => $total_seconds,
                 'status' => LeaveStatus::PROGRESSING
             ]);
+
+            $response['data']['leave'] = $leave_info;
         }
 
         return $response;
@@ -68,7 +70,7 @@ class LeaveService
     {
         $response = ['status' => ApiResponse::SUCCESS];
         $user_leaves = LeaveRepository::getByUser($user_id, 'desc');
-        $response['data']['leaves'] = $user_leaves;
+        $response['data']['records'] = $user_leaves;
 
         return $response;
     }

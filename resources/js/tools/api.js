@@ -1,6 +1,5 @@
 import axios from 'axios';
 import defined from './defined.js';
-import router from '../router/index.js';
 
 class Api {
   constructor() {
@@ -15,6 +14,10 @@ class Api {
     return this.sendRequest("/api/auth/login", "POST", false, data);
   }
 
+  userInfo() {
+    return this.sendRequest("/api/user/info", "GET", true);
+  }
+
   checkIn(data) {
     return this.sendRequest("/api/check/in", "POST", true, data);
   }
@@ -23,8 +26,12 @@ class Api {
     return this.sendRequest("/api/check/out", "POST", true, data);
   }
 
-  getUserRecord() {
+  getCheckRecords() {
     return this.sendRequest("/api/user/checks", "GET", true);
+  }
+
+  getLeaveRecords() {
+    return this.sendRequest("/api/user/leaves", "GET", true);
   }
 
   async sendRequest(url, method, withToken, body, queryString) {

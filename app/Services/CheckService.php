@@ -7,6 +7,8 @@ use App\Defined\ApiResponse;
 
 use App\Models\Check;
 
+use App\Repositories\CheckRepository;
+
 use App\Tools\Tool;
 
 class CheckService
@@ -22,9 +24,7 @@ class CheckService
     {
         $response = ['status' => ApiResponse::SUCCESS];
         $work_on_time = System::NORMAL_WORK_TIME;
-        $today_record = Check::where('user_id', $user_id)
-            ->whereDate('date', today())
-            ->first();
+        $today_record = CheckRepository::getUserRecordByDate($user_id, date('Y-m-d'));
 
         if (!is_null($today_record)) {
             $response['status'] = ApiResponse::CHECK_IN_EXISTS;
@@ -33,12 +33,13 @@ class CheckService
         } elseif (strtotime('now') < strtotime($work_on_time)) {
             $response['status'] = ApiResponse::CHECK_IN_NOT_OPEN;
         } else {
-            $record = new Check();
-            $record->date = today();
-            $record->user_id = $user_id;
-            $record->started_time = $started_time;
-
-            $record->save();
+            $check_info = CheckRepository::create([
+                'user_id' => $user_id,
+                'date' => today(),
+                'started_time' => $started_time
+            ]);
+            
+            $response['data']['check'] = $check_info;
         }
 
         return $response;
@@ -91,6 +92,7 @@ class CheckService
             ->when($date, function ($query) use ($date) {
                 $query->whereDate('date', $date);
             })
+            ->orderBy('date', 'desc')
             ->get()
             ->each(function ($record) {
                 $record->duration_time = Tool::secondsToTime($record->duration);
