@@ -21,6 +21,7 @@ abstract class ApiResponse
     /** 查無使用者 */
     const USER_NOT_FOUND = 104;
 
+    // ------ 簽到相關 ------
     /** 本日已簽到 */
     const CHECK_IN_EXISTS = 201;
     /** 本日尚未簽到 */
@@ -34,6 +35,7 @@ abstract class ApiResponse
     /** 時間格式有誤 */
     const CHECK_TIME_INVALID = 206;
 
+    // ------ 請假相關 ------
     /** 請假日期必填 */
     const LEAVE_DATE_REQUIRED = 301;
     /** 請假日期 格式非法 */
@@ -50,4 +52,8 @@ abstract class ApiResponse
     const LEAVE_END_REQUIRED = 307;
     /** 請假結束時間 格式非法 */
     const LEAVE_END_INVALID = 308;
+    /** 請假時數不足 */
+    const LEAVE_TIMES_NOT_ENOUGH = 309;
+    /** 查無請假資訊 */
+    const LEAVE_NOT_FOUND = 310;
 }

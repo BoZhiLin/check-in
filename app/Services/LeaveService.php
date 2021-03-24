@@ -2,16 +2,21 @@
 
 namespace App\Services;
 
+use App\Defined\LeaveType;
 use App\Defined\ApiResponse;
 use App\Defined\LeaveStatus;
+use App\Defined\TransactionType;
 
-use App\Models\Leave;
-use App\Models\Check;
+use App\Repositories\LeaveRepository;
+use App\Repositories\WalletRepository;
+use App\Repositories\TransactionRepository;
+
+use App\Tools\Tool;
 
 class LeaveService
 {
     /**
-     * 請假，需給主管or後台審核
+     * 請假，需給後台審核
      * 
      * @param int $user_id
      * @param string $date
@@ -23,16 +28,31 @@ class LeaveService
     public static function reply(int $user_id, string $date, string $type, string $started_time, string $ended_time)
     {
         $response = ['status' => ApiResponse::SUCCESS];
+        $total_seconds = Tool::duration($ended_time, $started_time);
 
-        $leave = new Leave();
-        $leave->user_id = $user_id;
-        $leave->date = $date;
-        $leave->type = $type;
-        $leave->started_time = $started_time;
-        $leave->ended_time = $ended_time;
-        $leave->status = LeaveStatus::PROGRESSING;
+        if ($type === LeaveType::SPECIAL || $type === LeaveType::RECOUP) {
+            $wallet = WalletRepository::getByUser($user_id, $type);
+        }
 
-        $leave->save();
+        if (isset($wallet)) {
+            if ($wallet->balance_available < $total_seconds) {
+                $response['status'] = ApiResponse::LEAVE_TIMES_NOT_ENOUGH;
+            } else {
+                TransactionRepository::createByWallet($wallet, TransactionType::LEAVE_REPLY, $total_seconds);
+            }
+        }
+
+        if ($response['status'] === ApiResponse::SUCCESS) {
+            LeaveRepository::create([
+                'user_id' => $user_id,
+                'date' => $date,
+                'type' => $type,
+                'started_time' => $started_time,
+                'ended_time' => $ended_time,
+                'duration' => $total_seconds,
+                'status' => LeaveStatus::PROGRESSING
+            ]);
+        }
 
         return $response;
     }
@@ -44,9 +64,11 @@ class LeaveService
      * @param string $date
      * @return array
      */
-    public static function getUserRecords(int $user_id, string $date = null)
+    public static function getUserRecords(int $user_id)
     {
         $response = ['status' => ApiResponse::SUCCESS];
+        $user_leaves = LeaveRepository::getByUser($user_id, 'desc');
+        $response['data']['leaves'] = $user_leaves;
 
         return $response;
     }
@@ -61,6 +83,25 @@ class LeaveService
     public static function verify(int $leave_id, string $status)
     {
         $response = ['status' => ApiResponse::SUCCESS];
+        $leave = LeaveRepository::findByPrimary($leave_id);
+
+        if (is_null($leave)) {
+            $response['status'] = ApiResponse::LEAVE_NOT_FOUND;
+        } else {
+            if ($status === LeaveStatus::REJECT) {
+                if ($leave->type === LeaveType::SPECIAL || $leave->type === LeaveType::RECOUP) {
+                    $wallet = WalletRepository::getByUser($leave->user_id, $leave->type);
+                    TransactionRepository::createByWallet(
+                        $wallet,
+                        TransactionType::RETURN_BALANCE,
+                        $leave->duration
+                    );
+                }
+            }
+
+            $leave->status = $status;
+            $leave->save();
+        }
 
         return $response;
     }

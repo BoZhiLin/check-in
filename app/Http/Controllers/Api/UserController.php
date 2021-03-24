@@ -22,9 +22,9 @@ class UserController extends ApiController
         return response($response);
     }
 
-    public function getLeaveRecords(Request $request)
+    public function getLeaveRecords()
     {
-        $response = LeaveService::getUserRecords(auth()->id(), $request->date);
+        $response = LeaveService::getUserRecords(auth()->id());
         return response($response);
     }
 }

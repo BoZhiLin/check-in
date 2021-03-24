@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c7bd60487ece8b6fb29ddd1acad7930",
+    "content-hash": "1f82f3e1e91c66251450714bd930f080",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1040,6 +1040,66 @@
                 "ui"
             ],
             "time": "2021-01-06T19:20:22+00:00"
+        },
+        {
+            "name": "latrell/lock",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/latrell/Lock.git",
+                "reference": "e639f69c97870f8f8495e94c457d4106a1bda481"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/latrell/Lock/zipball/e639f69c97870f8f8495e94c457d4106a1bda481",
+                "reference": "e639f69c97870f8f8495e94c457d4106a1bda481",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "illuminate/support": "5.*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Latrell\\Lock\\LockServiceProvider"
+                    ],
+                    "aliases": {
+                        "Lock": "Latrell\\Lock\\Facades\\Lock"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Latrell\\Lock\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Latrell Chan",
+                    "email": "i@latrell.me"
+                }
+            ],
+            "description": "支持Redis与Memcached的并发锁。",
+            "keywords": [
+                "l5",
+                "laravel",
+                "laravel 5",
+                "lock"
+            ],
+            "support": {
+                "issues": "https://github.com/latrell/Lock/issues",
+                "source": "https://github.com/latrell/Lock/tree/1.6"
+            },
+            "time": "2018-09-14T03:23:00+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -6525,6 +6585,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "latrell/lock": 20,
         "tymon/jwt-auth": 20
     },
     "prefer-stable": true,

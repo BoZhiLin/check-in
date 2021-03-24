@@ -2,25 +2,28 @@
 
 namespace App\Repositories;
 
-use App\Repositories\Interfaces\Eloquent;
-
-abstract class Repository implements Eloquent
+abstract class Repository
 {
+    /**
+     * @var \Illuminate\Database\Eloquent\Model
+     */
+    protected static $model;
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public static function all()
     {
-        return static::getModel()::get();
+        return static::$model::get();
     }
 
     /**
      * @param int $id
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public static function find(int $id)
+    public static function findByPrimary(int $id)
     {
-        return static::getModel()::find($id);
+        return static::$model::find($id);
     }
 
     /**
@@ -29,8 +32,6 @@ abstract class Repository implements Eloquent
      */
     public static function delete(int $id)
     {
-        return static::getModel()::destroy($id);
+        return static::$model::destroy($id);
     }
-    
-    abstract public static function getModel();
 }
