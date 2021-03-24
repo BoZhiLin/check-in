@@ -35,7 +35,11 @@ Route::group(['middleware' => ['api.auth']], function () {
 
     /** User */
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        /** 取得資訊 */
+        Route::get('/info', 'UserController@getInfo')->name('info');
         /** 取得打卡紀錄 */
         Route::get('/checks', 'UserController@getCheckRecords')->name('checks');
+        /** 取得請假紀錄 */
+        Route::get('/leaves', 'UserController@getLeaveRecords')->name('leaves');
     });
 });

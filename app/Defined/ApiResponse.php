@@ -33,4 +33,21 @@ abstract class ApiResponse
     const CHECK_TIME_REQUIRED = 205;
     /** 時間格式有誤 */
     const CHECK_TIME_INVALID = 206;
+
+    /** 請假日期必填 */
+    const LEAVE_DATE_REQUIRED = 301;
+    /** 請假日期 格式非法 */
+    const LEAVE_DATE_INVALID = 302;
+    /** 假別必選 */
+    const LEAVE_TYPE_REQUIRED = 303;
+    /** 假別不存在 */
+    const LEAVE_TYPE_NOT_FOUND = 304;
+    /** 請假開始時間 必填 */
+    const LEAVE_START_REQUIRED = 305;
+    /** 請假開始時間 格式非法 */
+    const LEAVE_START_INVALID = 306;
+    /** 請假結束時間 必填 */
+    const LEAVE_END_REQUIRED = 307;
+    /** 請假結束時間 格式非法 */
+    const LEAVE_END_INVALID = 308;
 }

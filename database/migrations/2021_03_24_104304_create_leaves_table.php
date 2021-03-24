@@ -21,6 +21,7 @@ class CreateLeavesTable extends Migration
             $table->time('started_time')->nullable()->comment('開始時間');
             $table->time('ended_time')->nullable()->comment('結束時間');
             $table->integer('duration')->default(0)->comment('休假時長(秒)');
+            $table->string('status')->nullable()->comment('審核狀態');
             $table->timestamps();
         });
     }

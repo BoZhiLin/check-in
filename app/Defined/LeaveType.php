@@ -2,11 +2,8 @@
 
 namespace App\Defined;
 
-abstract class RecordStatus
+abstract class LeaveType
 {
-    /** 一般上/下班 */
-    const NORMAL = 'NORMAL';
-
     /** 事假 */
     const PERSONAL = 'PERSONAL';
 
@@ -16,13 +13,16 @@ abstract class RecordStatus
     /** 特休 */
     const SPECIAL = 'SPECIAL';
 
+    /** 補休 */
+    const RECOUP = 'RECOUP';
+
     public static function all()
     {
         return [
-            self::NORMAL,
             self::PERSONAL,
             self::SICK,
             self::SPECIAL,
+            self::RECOUP,
         ];
     }
 }
