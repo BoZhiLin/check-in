@@ -72,4 +72,15 @@ class Tool
 
         return implode(':', [$hour, $minute, $second]);
     }
+
+    /**
+     * 計算年齡
+     * 
+     * @param string $date
+     * @return int
+     */
+    public static function getAge(string $date)
+    {
+        return Carbon::now()->diffInYears(Carbon::parse($date));
+    }
 }

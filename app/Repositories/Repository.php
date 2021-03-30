@@ -18,6 +18,36 @@ abstract class Repository
     }
 
     /**
+     * @param array $data
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public static function save(array $data)
+    {
+        $model = new static::$model($data);
+        $model->save();
+
+        return $model;
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public static function update(int $id, array $data)
+    {
+        $model = static::$model::find($id);
+
+        foreach ($data as $key => $value) {
+            $model->$key = $value;
+        }
+        
+        $model->save();
+
+        return $model;
+    }
+
+    /**
      * @param int $id
      * @return \Illuminate\Database\Eloquent\Model
      */

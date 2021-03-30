@@ -56,4 +56,34 @@ abstract class ApiResponse
     const LEAVE_TIMES_NOT_ENOUGH = 309;
     /** 查無請假資訊 */
     const LEAVE_NOT_FOUND = 310;
+
+    // ------ User相關 ------
+    /** 姓名必填 */
+    const USER_NAME_REQUIRED = 401;
+    /** 性別必選 */
+    const USER_GENDER_REQUIRED = 402;
+    /** 性別不存在 */
+    const USER_GENDER_NOT_FOUND = 403;
+    /** 身分證必填 */
+    const USER_ID_REQUIRED = 404;
+    /** 身分證已存在 */
+    const USER_ID_EXISTS = 405;
+    /** 生日必填 */
+    const USER_BIRTHDAY_REQUIRED = 406;
+    /** 生日格式非法 */
+    const USER_BIRTHDAY_INVALID = 407;
+    /** 地址必填 */
+    const USER_ADDRESS_REQUIRED = 408;
+    /** 帳號必填 */
+    const USER_ACCOUNT_REQUIRED = 409;
+    /** 帳號已存在 */
+    const USER_ACCOUNT_EXISTS = 410;
+    /** 密碼必填 */
+    const USER_PASSWORD_REQUIRED = 411;
+    /** 電話必填 */
+    const USER_PHONE_REQUIRED = 412;
+    /** 報到日必選 */
+    const USER_REPORT_REQUIRED = 413;
+    /** 報到日期非法 */
+    const USER_REPORT_INVALID = 414;
 }

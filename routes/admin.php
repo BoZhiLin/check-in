@@ -23,3 +23,18 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
     /** 更換Token */
     Route::post('/refresh', 'AuthController@refresh')->name('refresh')->middleware('admin.auth');
 });
+
+/** Authenticated Allow */
+Route::group(['middleware' => ['admin.auth']], function () {
+    /** User */
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        /** 員工列表 */
+        Route::get('/', 'UserController@index')->name('index');
+        /** 新增員工 */
+        Route::post('/', 'UserController@store')->name('store');
+        /** 更新員工資料 */
+        Route::put('/{user_id}', 'UserController@update')->name('update');
+        /** 刪除員工 */
+        Route::delete('/{user_id}', 'UserController@destroy')->name('destroy');
+    });
+});

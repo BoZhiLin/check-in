@@ -40,4 +40,38 @@ class UserService
 
         return $response;
     }
+
+    public static function getUsers()
+    {
+        $response = ['status' => ApiResponse::SUCCESS];
+        $response['data']['users'] = UserRepository::all();
+
+        return $response;
+    }
+
+    public static function addUser(array $data)
+    {
+        $response = ['status' => ApiResponse::SUCCESS];
+        $user = UserRepository::save($data);
+        $response['data']['user'] = $user;
+
+        return $response;
+    }
+
+    public static function setUser(int $user_id, array $data)
+    {
+        $response = ['status' => ApiResponse::SUCCESS];
+        $user = UserRepository::update($user_id, $data);
+        $response['data']['user'] = $user;
+
+        return $response;
+    }
+
+    public static function removeUser(int $user_id)
+    {
+        $response = ['status' => ApiResponse::SUCCESS];
+        UserRepository::delete($user_id);
+
+        return $response;
+    }
 }
