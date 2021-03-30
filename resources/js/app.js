@@ -51,5 +51,5 @@ Vue.component('vue-timepicker', VueTimepicker);
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
 });
