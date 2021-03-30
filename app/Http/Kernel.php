@@ -66,6 +66,9 @@ class Kernel extends HttpKernel
 
         'api.log' => \App\Http\Middleware\Api\Log::class,
         'api.auth' => \App\Http\Middleware\Api\Authenticate::class,
+
+        'admin.log' => \App\Http\Middleware\Admin\Log::class,
+        'admin.auth' => \App\Http\Middleware\Admin\Authenticate::class,
         
     ];
 }

@@ -41,6 +41,12 @@ return [
             'provider' => 'users',
         ],
 
+        'admin' => [
+            'driver' => 'jwt',
+            'provider' => 'admin',
+            'hash' => false,
+        ],
+
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
@@ -66,6 +72,11 @@ return [
     */
 
     'providers' => [
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminUser::class,
+        ],
+        
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
