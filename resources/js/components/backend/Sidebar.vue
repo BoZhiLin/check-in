@@ -15,17 +15,12 @@
         <div class="b-sidebar-body">
           <div class="px-3 py-2">
             <nav class="mb-3 items">
-              <ul class="nav flex-column">
+              <ul class="nav flex-column" style="color: white;">
                 <li class="nav-item">
-                  <a href="#" target="_self" class="nav-link active">Active</a>
+                  <b-link :to="{ name: 'admin.dashboard' }" class="nav-link">首頁</b-link>
                 </li>
                 <li class="nav-item">
-                  <a href="#link-1" target="_self" class="nav-link">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#link-2" target="_self" class="nav-link"
-                    >Another Link</a
-                  >
+                  <b-link class="nav-link" @click="logout">登出</b-link>
                 </li>
               </ul>
             </nav>
@@ -37,12 +32,37 @@
 </template>
 
 <script>
-export default {};
+import api from "@/tools/api/admin.js";
+import defined from "@/tools/defined.js";
+
+export default {
+  methods: {
+    logout() {
+      api.logout()
+        .then((response) => {
+          const { status, data } = response.data;
+
+          if (status === defined.response.SUCCESS) {
+            this.$router.push({ name: "admin.login" });
+          }
+        });
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 .items {
   margin-top: 50px;
   font-size: 18px;
+}
+
+.b-sidebar {
+  width: 250px;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
 }
 </style>

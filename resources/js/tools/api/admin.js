@@ -9,6 +9,10 @@ class Admin extends Base {
   login(data) {
     return this.sendRequest("/admin/api/auth/login", "POST", false, data, null, true);
   }
+
+  logout() {
+    return this.sendRequest("/admin/api/auth/logout", "POST", true);
+  }
 }
 
 export default new Admin();

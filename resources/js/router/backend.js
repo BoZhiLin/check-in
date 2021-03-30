@@ -13,7 +13,7 @@ export default [
   },
   {
     path: "/admin/dashboard",
-    name: "admin.login",
-    component: require("../views/backend/Home.vue").default
+    name: "admin.dashboard",
+    component: require("../views/backend/Dashboard.vue").default
   },
 ];
