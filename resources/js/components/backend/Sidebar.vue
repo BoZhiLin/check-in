@@ -17,10 +17,20 @@
             <nav class="mb-3 items">
               <ul class="nav flex-column" style="color: white;">
                 <li class="nav-item">
-                  <b-link :to="{ name: 'admin.dashboard' }" class="nav-link">首頁</b-link>
+                  <b-icon icon="house-door-fill" class="inline"></b-icon>
+                  <b-link :to="{ name: 'admin.dashboard' }" class="nav-link inline">首頁</b-link>
                 </li>
                 <li class="nav-item">
-                  <b-link class="nav-link" @click="logout">登出</b-link>
+                  <b-icon icon="person-badge-fill" class="inline"></b-icon>
+                  <b-link :to="{ name: 'admin.supers' }" class="nav-link inline">後台人員</b-link>
+                </li>
+                <li class="nav-item">
+                  <b-icon icon="person-fill" class="inline"></b-icon>
+                  <b-link :to="{ name: 'admin.users' }" class="nav-link inline">員工管理</b-link>
+                </li>
+                <li class="nav-item">
+                  <b-icon icon="forward-fill" class="inline"></b-icon>
+                  <b-link class="nav-link inline" @click="logout">登出</b-link>
                 </li>
               </ul>
             </nav>
@@ -64,5 +74,14 @@ export default {
 a {
   color: #fff;
   text-decoration: none;
+}
+
+.inline {
+  display: inline;
+  padding: 1px;
+}
+
+.nav-item {
+  padding-bottom: 15px;
 }
 </style>

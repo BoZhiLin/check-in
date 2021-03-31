@@ -1,15 +1,17 @@
 <template>
   <div>
-    <Sidebar></Sidebar>
+    <Layout>
+      
+    </Layout>
   </div>
 </template>
 
 <script>
-import Sidebar from "@/components/backend/Sidebar";
+import Layout from "@/components/backend/Layout";
 
 export default {
   components: {
-    Sidebar,
+    Layout,
   },
 }
 </script>
