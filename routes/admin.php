@@ -34,6 +34,10 @@ Route::group(['middleware' => ['admin.auth']], function () {
         Route::post('/', 'UserController@store')->name('store');
         /** 更新員工資料 */
         Route::put('/{user_id}', 'UserController@update')->name('update');
+        /** 註記離職 */
+        Route::put('/{user_id}/leave', 'UserController@leave')->name('leave');
+        /** 註記復職 */
+        Route::put('/{user_id}/active', 'UserController@active')->name('active');
         /** 刪除員工 */
         Route::delete('/{user_id}', 'UserController@destroy')->name('destroy');
     });

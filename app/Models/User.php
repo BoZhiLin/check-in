@@ -29,6 +29,8 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'phone',
         'report_date',
+        'leave_date',
+        'is_active',
         'remark',
     ];
 
@@ -58,6 +60,11 @@ class User extends Authenticatable implements JWTSubject
     public function salary()
     {
         return $this->hasOne(Salary::class);
+    }
+
+    public function userChangeLogs()
+    {
+        return $this->hasMany(UserChangeLog::class);
     }
 
     public function checks()

@@ -25,7 +25,9 @@ class CreateUsersTable extends Migration
             $table->string('password')->comment('密碼');
             $table->string('phone')->nullable()->comment('聯絡電話');
             $table->date('report_date')->nullable()->comment('報到日');
+            $table->date('leave_date')->nullable()->comment('離職日');
             $table->text('remark')->nullable()->comment('備註');
+            $table->boolean('is_active')->default(true)->comment('啟用狀態');
             $table->timestamps();
             $table->softDeletes();
         });

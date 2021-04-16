@@ -1,5 +1,35 @@
 const mix = require('laravel-mix');
 
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s(c|a)ss$/,
+        use: [
+          "vue-style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            // Requires sass-loader@^7.0.0
+            options: {
+              implementation: require("sass"),
+              indentedSyntax: true, // optional
+            },
+            // Requires sass-loader@^8.0.0
+            options: {
+              implementation: require("sass"),
+              sassOptions: {
+                indentedSyntax: true, // optional
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,13 +42,15 @@ const mix = require('laravel-mix');
  */
 
 mix.webpackConfig({
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, 'resources/js/')
-        }
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'resources/assets/admin/'),
+      '~': path.resolve(__dirname, 'resources/assets/home/')
     }
+  }
 });
 
-mix.js('resources/js/app.js', 'public/js')
-    // .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+
+mix.js('resources/assets/home/app.js', 'public/js/home')
+  .js('resources/assets/admin/app.js', 'public/js/admin')
+  .version();

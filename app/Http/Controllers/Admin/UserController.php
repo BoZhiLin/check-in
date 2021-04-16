@@ -62,6 +62,18 @@ class UserController extends AdminController
         return response($response);
     }
 
+    public function leave(Request $request, int $user_id)
+    {
+        $response = UserService::setLeave($user_id, $request->date);
+        return response($response);
+    }
+
+    public function active(Request $request, int $user_id)
+    {
+        $response = UserService::setActive($user_id, $request->date);
+        return response($response);
+    }
+
     protected function handleValidation(int $id = 0)
     {
         $rules = [

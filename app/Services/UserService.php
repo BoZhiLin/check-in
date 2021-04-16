@@ -74,4 +74,38 @@ class UserService
 
         return $response;
     }
+
+    /**
+     * 註記為離職
+     */
+    public static function setLeave(int $user_id, string $date)
+    {
+        $response = ['status' => ApiResponse::SUCCESS];
+        $user = UserRepository::findByPrimary($user_id);
+
+        if (is_null($user)) {
+            $response['status'] = ApiResponse::USER_NOT_FOUND;
+        } else {
+            UserRepository::setLeave($user, $date);
+        }
+
+        return $response;
+    }
+
+    /**
+     * 復職
+     */
+    public static function setActive(int $user_id, string $date)
+    {
+        $response = ['status' => ApiResponse::SUCCESS];
+        $user = UserRepository::findByPrimary($user_id);
+
+        if (is_null($user)) {
+            $response['status'] = ApiResponse::USER_NOT_FOUND;
+        } else {
+            UserRepository::setActive($user, $date);
+        }
+
+        return $response;
+    }
 }
